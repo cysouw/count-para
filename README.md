@@ -14,14 +14,14 @@ The idea is to simply put a number at the start of each paragraph, hard coded in
 
 There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. [Pandoc](https://pandoc.org) is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc's extension of [Markdown](https://daringfireball.net/projects/markdown/syntax), and then the text can be published into different formats. Pandoc has an extension mechanism called 'filters', and the easiest to use variant are 'lua filters'. They basically consist of just one file that provides the extra functionality.
 
-The file `count-para.lua` in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in [HTML](https://rawgit.com/cysouw/count-para/master/readme.html) and as a [PDF](https://rawgit.com/cysouw/count-para/master/readme.pdf) made with Latex by the following commands (much of this can be specified in so-called `default` files, which are much easier to handle).
+The file `count-para.lua` in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in [HTML](https://cdn.jsdelivr.net/gh/cysouw/count-para@master/readme.html) and as a [PDF](https://cdn.jsdelivr.net/gh/cysouw/count-para@master/readme.pdf) made with Latex by the following commands (much of this can be specified in so-called `default` files, which are much easier to handle).
 
 ```
 pandoc readme.md -t html -o readme.html -L count-para.lua -s
 pandoc readme.md -o readme.pdf -L count-para.lua
 ```
 
-For a more involved example, check out my [manuscript](https://github.com/cysouw/diathesis) about German grammar, the HTML version can be directly accesed [here](https://rawgit.com/cysouw/diathesis/master/cysouwDiathesisManuscript.html).
+For a more involved example, check out my [manuscript](https://github.com/cysouw/diathesis) about German grammar, the HTML version can be directly accessed [here](https://rawgit.com/cysouw/diathesis/master/cysouwDiathesisManuscript.html).
 
 ## Referencing
 
