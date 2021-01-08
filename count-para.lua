@@ -45,7 +45,7 @@ function addGlobalFormatting (meta)
   if FORMAT:match "html" then
     local css = [[ 
     <style>
-    .paragraph-count sup { 
+    .paragraph-number sup { 
       color: grey;
       font-size: x-small;
     }

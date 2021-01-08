@@ -150,7 +150,7 @@
   <![endif]-->
    
       <style>
-      .paragraph-count sup { 
+      .paragraph-number sup { 
         color: grey;
         font-size: x-small;
       }
@@ -190,7 +190,13 @@ pandoc readme.md -o readme.pdf -L count-para.lua</code></pre>
 </div>
 <h2 id="referencing">Referencing</h2>
 <div id="8" class="paragraph-number" style="text-indent: -15px;">
-<p><sup>[8]</sup> Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash <code>#</code> as an indicator of paragraphs, like this (Cysouw 2012#2.7), to differentiate it from page numbers, like this (Cysouw 2012: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: <a href="https://rawgit.com/cysouw/diathesis/master/cysouwDiathesisManuscript.html#2.7">(Cysouw 2012#2.7)</a>. By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. This is an option of the filter by specifying <strong><code>resetAtChapter: true</code></strong> in the defaults-file. The term ‘chapter’ is a slight misnomer, because it simply refers to the highest level of headings in the manuscript.</p>
+<p><sup>[8]</sup> Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash <code>#</code> as an indicator of paragraphs, like this (Cysouw 2012#2.7), to differentiate it from page numbers, like this (Cysouw 2012: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: <a href="https://rawgit.com/cysouw/diathesis/master/cysouwDiathesisManuscript.html#2.7">(Cysouw 2012#2.7)</a>. By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. This is an option of the filter by specifying <strong><code>resetAtChapter: true</code></strong> in the defaults-file. The term ‘chapter’ is a slight misnomer, because it simply refers to the highest level of headings in the manuscript.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Maybe a footnote?<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </body>
 </html>
