@@ -1,5 +1,10 @@
 # Adding a paragraph counter to text
 
+**Summary**: Use this Pandoc filter to add numbers to paragraphs of a text. These numbers can be used in scholarly references in an online world of adaptive design where page numbers are not useful anymore.
+
+- Check out this readme in [HTML](https://gitcdn.link/repo/cysouw/count-para/main/readme.html) and [PDF](https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf).
+- Refer to paragraphs by using a hash, e.g. (Cysouw 2021: #9), and add this hashtag to the end of a link to be automatically directed to the paragraph, e.g. [(Cysouw 2021: #9)](https://gitcdn.link/repo/cysouw/count-para/main/readme.html#9).
+
 ## Rationale
 
 Even scientific writing, notwithstanding its very conservative nature, is moving to new forms of publication. One of the ongoing changes is the appearance of a diverse set of **electronic forms of publication**. Articles and books are all (coming) online, and many are also available as html. Also ePub is clearly an avenue to consider. In general, any such new formats will have to be adaptive to different screen sizes.
@@ -25,7 +30,7 @@ For a more involved example, check out my [manuscript](https://github.com/cysouw
 
 ## Referencing
 
-Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash `#` as an indicator of paragraphs, like this (Cysouw 2012#2.7), to differentiate it from page numbers, like this (Cysouw 2012: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: [(Cysouw 2012#2.7)](https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html#2.7). By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. This is an option of the filter by specifying **`resetAtChapter: true`** in the defaults-file. The term 'chapter' is a slight misnomer, because it simply refers to the highest level of headings in the manuscript.^[Maybe a footnote?]
+Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash `#` as an indicator of paragraphs, like this (Cysouw 2012: #2.7), to differentiate it from page numbers, like this (Cysouw 2012: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: [(Cysouw 2012: #2.7)](https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html#2.7). By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. This is an option of the filter by specifying **`resetAtChapter: true`** in the defaults-file. The term 'chapter' is a slight misnomer, because it simply refers to the highest level of headings in the manuscript.
 
 ---
 title: count-para
