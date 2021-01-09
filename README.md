@@ -43,8 +43,8 @@ Now we can refer to paragraphs! Of course we can simple write them in our citati
 
 ## Options
 
-**`resetAtChapter`** To restart numbering this filter provides an option: by specifying `resetAtChapter: true` in the metadata for Pandoc (for an example, see below) paragraph-numbers will restart each chapter and a chapter number is added. The term 'chapter' is a slight misnomer, because it simply refers to the highest level of headings in the manuscript. Note that the chapter numbers are also added when there are no explicit chapter numbers.
-**`enclosing`** By default, the numbers are enclosed in square brackets. This option allows for other enclosures. Typically, a sequence of two characters is provided, an opening and a closing character, e.g `"()"` or `"[]"`. When a single character is provided, this is reused, e.g `"|"`. Absence of any enclosure is achieved by providing an empty string, i.e `""`.
+- **`resetAtChapter`** To restart numbering this filter provides an option: by specifying `resetAtChapter: true` in the metadata for Pandoc (for an example, see below) paragraph-numbers will restart each chapter and a chapter number is added. The term 'chapter' is a slight misnomer, because it simply refers to the highest level of headings in the manuscript. Note that the chapter numbers are also added when there are no explicit chapter numbers.
+- **`enclosing`** By default, the numbers are enclosed in square brackets. This option allows for other enclosures. Typically, a sequence of two characters is provided, an opening and a closing character, e.g `"()"` or `"[]"`. When a single character is provided, this is reused, e.g `"|"`. Absence of any enclosure is achieved by providing an empty string, i.e `""`.
 
 ```
 ---
