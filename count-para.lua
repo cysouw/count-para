@@ -1,7 +1,7 @@
 --[[
 
 Make all 'regular' paragraphs into a div and assign a numeric ID
-Format this number in the left margin
+Format this number in the margin
 
 Copyright © 2021 Michael Cysouw <cysouw@mac.com>
 
@@ -21,15 +21,19 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 count = 0
 chapter = 0
 
-------------------------------------
--- User Settings with default values
-------------------------------------
+------------------------------
+-- Options with default values
+------------------------------
 
 resetAtChapter = false
+enclosing = "[]"
 
 function getUserSettings (meta)
   if meta.resetAtChapter ~= nil then
     resetAtChapter = meta.resetAtChapter
+  end
+  if meta.enclosing ~= nil then
+    enclosing = pandoc.utils.stringify(meta.enclosing)
   end
 end
 
@@ -37,7 +41,7 @@ end
 -- Add global formatting
 ------------------------
 
-function addGlobalFormatting (meta)
+function addFormatting (meta)
 
   local tmp = meta['header-includes']
               or pandoc.MetaList{meta['header-includes']}
@@ -115,7 +119,15 @@ function formatNumber (div)
   
   -- only do this for Divs of the right class
   if div.classes[1] == "paragraph-number" then
-    local string = "["..div.identifier.."]"
+
+    -- format number
+    local string = div.identifier
+    --if enclosing == "" then
+    if enclosing:len() == 1 then
+      string = enclosing..div.identifier..enclosing
+    else
+      string = enclosing:sub(1,1)..div.identifier..enclosing:sub(2,2)
+    end
 
     if FORMAT:match "latex" then
       -- use marginnote for formatting number in margin
@@ -129,19 +141,22 @@ function formatNumber (div)
 
     else
       
-      -- format number at start of Para
+      -- insert number at start of Para
       local number = pandoc.Superscript(string)
       table.insert(div.content[1].content, 1, pandoc.Space())
       table.insert(div.content[1].content, 1, number)
       
-      -- rough approximation for negative text indent
-      local points = string.len(div.identifier)*5 + 10
+      -- approximate negative text indent depends on size of number
+      -- should be fine-tuned by whatever CSS is used
+      local small = 0 n = tostring(string)
+      for i=1,#n do if n:sub(i,i):find("[1|]") ~= nil  then small=small+1 end end
+      -- space + nchars - n_small_chars
+      local points = 5 + string.len(string)*5 - small*1
       div.attributes = {style = "text-indent: -"..points.."px;"}
       end
     
   end
   return(div)
-  --return(div.content[1])
 end
 
 --------------------
@@ -149,7 +164,7 @@ end
 --------------------
 
 return {
-  { Meta = addGlobalFormatting },
+  { Meta = addFormatting },
   { Meta = getUserSettings },
   { Pandoc = countPara },
   { Div = formatNumber }
