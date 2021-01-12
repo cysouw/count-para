@@ -32,21 +32,26 @@ local refName = "paragraph "
 local addPageNr = true
 
 function getUserSettings (meta)
+
   if meta.resetAtChapter ~= nil then
     resetAtChapter = meta.resetAtChapter
   end
+
   if meta.enclosing ~= nil then
     enclosing = pandoc.utils.stringify(meta.enclosing)
   end
+
   if meta.refName ~= nil then
     refName = pandoc.utils.stringify(meta.refName)
     if FORMAT:match "latex" then
       if refName == "#" then refName = "\\#" end
     end
   end
+
   if meta.addPageNr ~= nil then
     addPageNr = meta.addPageNr
   end
+
 end
 
 ------------------------
@@ -130,16 +135,15 @@ function countPara (doc)
         if FORMAT:match "latex" then
           table.insert(doc.blocks[i].content, 1,
             pandoc.RawInline("tex", "\\hypertarget{"..userID.."}{")
-              )
+          )
           table.insert(doc.blocks[i].content, 3, 
             pandoc.RawInline("tex", "}\\label{"..userID.."}")
-              )
+          )
         end
       end
 
       -- add Div with class to Para	
-      doc.blocks[i] = pandoc.Div( doc.blocks[i], 
-          pandoc.Attr(ID, {"paragraph-number"}))
+      doc.blocks[i] = pandoc.Div( doc.blocks[i], pandoc.Attr(ID, {"paragraph-number"}))
     end
 
   end
@@ -152,14 +156,13 @@ end
 
 function setCrossRefs (cite)
 
-  -- check internal references to paragraphs
   local userID = cite.citations[1].id
 
   -- ignore other "cite" elements
   if indexUserID[userID] ~= nil then
   
-    local paraID = indexUserID[userID] 
     -- make in-document cross-references
+    local paraID = indexUserID[userID] 
     if FORMAT:match "latex" then
       if addPageNr then
         return pandoc.RawInline("tex", 
@@ -191,7 +194,7 @@ function formatNumber (div)
 
     -- format number
     local string = div.identifier
-    --if enclosing == "" then
+
     if enclosing:len() == 1 then
       string = enclosing..div.identifier..enclosing
     else
@@ -219,13 +222,16 @@ function formatNumber (div)
       -- should be fine-tuned by whatever CSS is used
       local small = 0 
       local n = tostring(string)
-      for i=1,#n do if n:sub(i,i):find("[1|]") ~= nil  then small=small+1 end end
+      for i=1,#n do 
+        if n:sub(i,i):find("[1|]") ~= nil  then small=small+1 end 
+      end
       -- space + nchars - n_small_chars
       local points = 5 + string.len(string)*5 - small*1
       div.attributes = {style = "text-indent: -"..points.."px;"}
       end
     
   end
+
   return(div)
 end
 

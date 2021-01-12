@@ -186,7 +186,7 @@
 </div>
 <h2 id="practice">Practice</h2>
 <div id="6" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[6]</sup> There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. <a href="https://pandoc.org">Pandoc</a> is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc’s extension of <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a>, and then the text can be published into different formats. Pandoc has an extension mechanism called ‘filters’, and the easiest to use variant are ‘lua filters’. They basically consist of just one file that provides the extra functionality. see <a href="#10">paragraph 10</a>.</p>
+<p><sup>[6]</sup> There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. <a href="https://pandoc.org">Pandoc</a> is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc’s extension of <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a>, and then the text can be published into different formats. Pandoc has an extension mechanism called ‘filters’, and the easiest to use variant are ‘lua filters’. They basically consist of just one file that provides the extra functionality.</p>
 </div>
 <div id="7" class="paragraph-number" style="text-indent: -20px;">
 <p><sup>[7]</sup> The file <code>count-para.lua</code> in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.html">HTML</a> and as a <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf">PDF</a> made with Latex by the following commands (much of this can be specified in so-called <code>default</code> files, which are much easier to handle):</p>
@@ -210,7 +210,7 @@ pandoc readme.md \
 </div>
 <h2 id="in-document-referencing">In-document referencing</h2>
 <div id="10" class="paragraph-number" style="text-indent: -24px;">
-<p><sup>[10]</sup> It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: <code>{#test}</code>. As you can see in this readme, there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this <code>[@test]</code>. After Pandoc processing, it then looks like a reference to <a href="#10">paragraph 10</a> (and this reference is also hyperlinked).</p>
+<p><sup>[10]</sup> It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: <code>{#test}</code>. As you can see in this readme (in the <a href="https://github.com/cysouw/count-para#in-document-referencing">GitHub version</a>), there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this <code>[@test]</code>. After Pandoc processing, it then looks like a reference to <a href="#10">paragraph 10</a> (this reference is replace by a number and hyperlinked after processing with Pandoc).</p>
 </div>
 <h2 id="options">Options</h2>
 <ul>
@@ -219,6 +219,10 @@ pandoc readme.md \
 <li><strong><code>refName</code></strong> How should in-document references by called? By default the string “<code>paragraph</code>” (with a space) is inserted in-text before a paragraph-reference number. But you could for example set this to simply <code>refName: "#"</code> to get a hash without space before the number. Or you can leave it empty and just type whatever you want before the number.</li>
 <li><strong><code>addPageNr</code></strong> is by default set to <code>addPageNr: true</code>. This option is only relevant for page-based formats and it will add “on page X” after the paragraph number. Currently only implemented for latex.</li>
 </ul>
+<h2 id="issues">Issues</h2>
+<div id="11" class="paragraph-number" style="text-indent: -23px;">
+<p><sup>[11]</sup> Because of the usage of the Pandoc Cite-format, this filter has to be applied before the <code>citeproc</code> filter that processes the literature references.</p>
+</div>
 <pre><code>---
 title: count-para
 author: Michael Cysouw
