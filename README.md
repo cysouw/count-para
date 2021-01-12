@@ -18,7 +18,7 @@ The idea is to simply put a number at the start of each paragraph, hard coded in
 
 ## Practice
 
-There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. [Pandoc](https://pandoc.org) is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc's extension of [Markdown](https://daringfireball.net/projects/markdown/syntax), and then the text can be published into different formats. Pandoc has an extension mechanism called 'filters', and the easiest to use variant are 'lua filters'. They basically consist of just one file that provides the extra functionality.
+There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. [Pandoc](https://pandoc.org) is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc's extension of [Markdown](https://daringfireball.net/projects/markdown/syntax), and then the text can be published into different formats. Pandoc has an extension mechanism called 'filters', and the easiest to use variant are 'lua filters'. They basically consist of just one file that provides the extra functionality. see [@test].
 
 The file `count-para.lua` in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in [HTML](https://gitcdn.link/repo/cysouw/count-para/main/readme.html) and as a [PDF](https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf) made with Latex by the following commands (much of this can be specified in so-called `default` files, which are much easier to handle):
 
@@ -41,10 +41,16 @@ For a more involved example, check out my [manuscript](https://github.com/cysouw
 
 Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash '#' as an indicator of paragraphs, like this (Cysouw 2021: #2.7), to differentiate them from page numbers, like this (Cysouw 2021: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: [(Cysouw 2021: #2.7)](https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html#2.7). By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. 
 
+## In-document referencing
+
+{#test} It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: `{#test}`. As you can see in this readme, there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this `[@test]`. After Pandoc processing, it then looks like a reference to [@test] (and this reference is also hyperlinked).
+
 ## Options
 
 - **`resetAtChapter`** To restart numbering this filter provides an option: by specifying `resetAtChapter: true` in the metadata for Pandoc (for an example, see below) paragraph-numbers will restart each chapter and a chapter number is added. The term 'chapter' is a slight misnomer, because it simply refers to the highest level of headings in the manuscript. Note that the chapter numbers are also added when there are no explicit chapter numbers.
 - **`enclosing`** By default, the numbers are enclosed in square brackets. This option allows for other enclosures. Typically, a sequence of two characters is provided, an opening and a closing character, e.g `"()"` or `"[]"`. When a single character is provided, this is reused, e.g `"|"`. Absence of any enclosure is achieved by providing an empty string, i.e `""`.
+- **`refName`** How should in-document references by called? By default the string "`paragraph `" (with a space) is inserted in-text before a paragraph-reference number. But you could for example set this to simply `refName: "#"` to get a hash without space before the number. Or you can leave it empty and just type whatever you want before the number.
+- **`addPageNr`** is by default set to `addPageNr: true`. This option is only relevant for page-based formats and it will add "on page X" after the paragraph number. Currently only implemented for latex.
 
 ```
 ---
@@ -52,6 +58,8 @@ title: count-para
 author: Michael Cysouw
 resetAtChapter: false
 enclosing: "[]"
+refName: "paragraph "
+addPageNr: true
 ---
 ```
 ---

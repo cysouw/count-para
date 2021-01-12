@@ -18,15 +18,18 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ]]
 
-count = 0
-chapter = 0
+local count = 0
+local chapter = 0
+local indexUserID = {}
 
 ------------------------------
 -- Options with default values
 ------------------------------
 
-resetAtChapter = false
-enclosing = "[]"
+local resetAtChapter = false
+local enclosing = "[]"
+local refName = "paragraph "
+local addPageNr = true
 
 function getUserSettings (meta)
   if meta.resetAtChapter ~= nil then
@@ -34,6 +37,15 @@ function getUserSettings (meta)
   end
   if meta.enclosing ~= nil then
     enclosing = pandoc.utils.stringify(meta.enclosing)
+  end
+  if meta.refName ~= nil then
+    refName = pandoc.utils.stringify(meta.refName)
+    if FORMAT:match "latex" then
+      if refName == "#" then refName = "\\#" end
+    end
+  end
+  if meta.addPageNr ~= nil then
+    addPageNr = meta.addPageNr
   end
 end
 
@@ -101,6 +113,30 @@ function countPara (doc)
         ID = chapter.."."..count 
       end
 
+      -- check for user-inserted IDs at the start of the paragraph
+      local firstElem = pandoc.utils.stringify(doc.blocks[i].content[1])
+      local userID = firstElem:match("{#(.*)}")
+
+      if userID ~= nil then
+        -- add to index
+        indexUserID[userID] = ID
+        -- remove reference from text
+        table.remove(doc.blocks[i].content, 1)
+        -- remove possible space
+        if doc.blocks[i].content[1].tag == "Space" then
+          table.remove(doc.blocks[i].content, 1)
+        end
+        -- add label for Latex
+        if FORMAT:match "latex" then
+          table.insert(doc.blocks[i].content, 1,
+            pandoc.RawInline("tex", "\\hypertarget{"..userID.."}{")
+              )
+          table.insert(doc.blocks[i].content, 3, 
+            pandoc.RawInline("tex", "}\\label{"..userID.."}")
+              )
+        end
+      end
+
       -- add Div with class to Para	
       doc.blocks[i] = pandoc.Div( doc.blocks[i], 
           pandoc.Attr(ID, {"paragraph-number"}))
@@ -109,6 +145,39 @@ function countPara (doc)
   end
   return doc
 end
+
+------------------------------
+-- set in-text cross-references
+------------------------------
+
+function setCrossRefs (cite)
+
+  -- check internal references to paragraphs
+  local userID = cite.citations[1].id
+
+  -- ignore other "cite" elements
+  if indexUserID[userID] ~= nil then
+  
+    local paraID = indexUserID[userID] 
+    -- make in-document cross-references
+    if FORMAT:match "latex" then
+      if addPageNr then
+        return pandoc.RawInline("tex", 
+          refName.."\\hyperlink{"..userID.."}{"..paraID.."} \
+            on page~\\pageref{"..userID.."}"
+          )
+      else
+        return pandoc.RawInline("tex", 
+          refName.."\\hyperlink{"..userID.."}{"..paraID.."}"
+          )
+      end
+    else
+      return pandoc.Link(refName..paraID, "#"..paraID)
+    end
+
+  end
+end
+
 
 ------------------------------
 -- format for Latex and HTML using attributes
@@ -148,7 +217,8 @@ function formatNumber (div)
       
       -- approximate negative text indent depends on size of number
       -- should be fine-tuned by whatever CSS is used
-      local small = 0 n = tostring(string)
+      local small = 0 
+      local n = tostring(string)
       for i=1,#n do if n:sub(i,i):find("[1|]") ~= nil  then small=small+1 end end
       -- space + nchars - n_small_chars
       local points = 5 + string.len(string)*5 - small*1
@@ -167,5 +237,6 @@ return {
   { Meta = addFormatting },
   { Meta = getUserSettings },
   { Pandoc = countPara },
+  { Cite = setCrossRefs },
   { Div = formatNumber }
 }
