@@ -149,12 +149,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
    
-      <style>
-      .paragraph-number sup { 
-        color: grey;
-        font-size: x-small;
-      }
-      </style>
+    <style>
+    .paragraph-number { 
+      float: left;
+      margin-left: -5em;
+      width: 4.5em;
+      text-align: right;
+      color: grey;
+      font-size: x-small;
+      padding-top: 5px;
+    }
+    </style>
       
 </head>
 <body>
@@ -163,34 +168,20 @@
 <p class="author">Michael Cysouw</p>
 </header>
 <h1 id="adding-a-paragraph-counter-to-text">Adding a paragraph counter to text</h1>
-<div id="1" class="paragraph-number" style="text-indent: -19px;">
-<p><sup>[1]</sup> <strong>Summary</strong>: Use this Pandoc filter to add numbers to paragraphs of a text. These numbers can be used as stable identifiers for scholarly citations in an online world of adaptive design where page numbers are not useful anymore.</p>
-</div>
+<p><span id="1" class="paragraph-number">[1]</span> <strong>Summary</strong>: Use this Pandoc filter to add numbers to paragraphs of a text. These numbers can be used as stable identifiers for scholarly citations in an online world of adaptive design where page numbers are not useful anymore.</p>
 <ul>
 <li>Check out this readme in <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.html">HTML</a> and <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf">PDF</a>.</li>
 <li>Refer to paragraphs by using a hash, e.g. (Cysouw 2021: #9), and add this hashtag to the end of a link to be automatically directed to the paragraph, e.g. link to the ninth paragraph of this readme like this: <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.html#9">(Cysouw 2021: #9)</a>.</li>
 <li>There is explicitly no option to hide these identifiers in the final output, because the numbers are supposed to be ‘hard-coded’ into the text for them to function as stable identifiers.</li>
 </ul>
 <h2 id="rationale">Rationale</h2>
-<div id="2" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[2]</sup> Even scientific writing, notwithstanding its very conservative nature, is moving to new forms of publication. One of the ongoing changes is the appearance of a diverse set of <strong>electronic forms of publication</strong>. Articles and books are all (coming) online, and many are also available as html. Also ePub is clearly an avenue to consider. In general, any such new formats will have to be adaptive to different screen sizes.</p>
-</div>
-<div id="3" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[3]</sup> One of the central problems this poses for academia (besides the obvious infrastructure issues) is that one of the central scholarly traditions breaks down, namely the <strong>reference to a page number</strong> of a work. Currently, there is a strong tendency for online publications to always <em>also</em> make a PDF available that looks like a classical printed book with page layout. The main reason for these PDF-versions is that they still provide an authoritative separation of the work into pages for reference (less and less readers are actually printing them).</p>
-</div>
-<div id="4" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[4]</sup> It is time to move to a different approach to citation. Figures and tables can be numbered, and of course there are numbered sections. However, for a more fine-grained approach I propose to simply number <strong>paragraphs</strong>. A paragraph is a clearly defined part of a text, and it remains the same paragraph on different screen sizes with different wrappings (this does not hold, for example, for line numbers). A good written paragraph has a clear message, so for precise citation this seems like an ideal match (and ranges of paragraphs can of course also be used).</p>
-</div>
-<div id="5" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[5]</sup> The idea is to simply put a number at the start of each paragraph, hard coded into the text so it cannot be changed (it has to be a <strong>stable identifier</strong>!). Depending on the electronic format, different ways to actually display these identifiers can be used. Being hard coded at the start of a paragraph does not necessarily mean that they should be obtrusive!</p>
-</div>
+<p><span id="2" class="paragraph-number">[2]</span> Even scientific writing, notwithstanding its very conservative nature, is moving to new forms of publication. One of the ongoing changes is the appearance of a diverse set of <strong>electronic forms of publication</strong>. Articles and books are all (coming) online, and many are also available as html. Also ePub is clearly an avenue to consider. In general, any such new formats will have to be adaptive to different screen sizes.</p>
+<p><span id="3" class="paragraph-number">[3]</span> One of the central problems this poses for academia (besides the obvious infrastructure issues) is that one of the central scholarly traditions breaks down, namely the <strong>reference to a page number</strong> of a work. Currently, there is a strong tendency for online publications to always <em>also</em> make a PDF available that looks like a classical printed book with page layout. The main reason for these PDF-versions is that they still provide an authoritative separation of the work into pages for reference (less and less readers are actually printing them).</p>
+<p><span id="4" class="paragraph-number">[4]</span> It is time to move to a different approach to citation. Figures and tables can be numbered, and of course there are numbered sections. However, for a more fine-grained approach I propose to simply number <strong>paragraphs</strong>. A paragraph is a clearly defined part of a text, and it remains the same paragraph on different screen sizes with different wrappings (this does not hold, for example, for line numbers). A good written paragraph has a clear message, so for precise citation this seems like an ideal match (and ranges of paragraphs can of course also be used).</p>
+<p><span id="5" class="paragraph-number">[5]</span> The idea is to simply put a number at the start of each paragraph, hard coded into the text so it cannot be changed (it has to be a <strong>stable identifier</strong>!). Depending on the electronic format, different ways to actually display these identifiers can be used. Being hard coded at the start of a paragraph does not necessarily mean that they should be obtrusive!</p>
 <h2 id="practice">Practice</h2>
-<div id="6" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[6]</sup> There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. <a href="https://pandoc.org">Pandoc</a> is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc’s extension of <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a>, and then the text can be published into different formats. Pandoc has an extension mechanism called ‘filters’, and the easiest to use variant are ‘lua filters’. They basically consist of just one file that provides the extra functionality.</p>
-</div>
-<div id="7" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[7]</sup> The file <code>count-para.lua</code> in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.html">HTML</a> and as a <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf">PDF</a> made with Latex by the following commands (much of this can be specified in so-called <code>default</code> files, which are much easier to handle):</p>
-</div>
+<p><span id="6" class="paragraph-number">[6]</span> There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. <a href="https://pandoc.org">Pandoc</a> is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc’s extension of <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a>, and then the text can be published into different formats. Pandoc has an extension mechanism called ‘filters’, and the easiest to use variant are ‘lua filters’. They basically consist of just one file that provides the extra functionality.</p>
+<p><span id="7" class="paragraph-number">[7]</span> The file <code>count-para.lua</code> in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.html">HTML</a> and as a <a href="https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf">PDF</a> made with Latex by the following commands (much of this can be specified in so-called <code>default</code> files, which are much easier to handle):</p>
 <pre><code>pandoc readme.md \
     --to html \
     --output readme.html \
@@ -201,17 +192,11 @@ pandoc readme.md \
     --to pdf \
     --output readme.pdf \
     --lua-filter count-para.lua</code></pre>
-<div id="8" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[8]</sup> For a more involved example, check out my <a href="https://github.com/cysouw/diathesis">manuscript</a> about German grammar written in Pandoc Markdown. The HTML version can be directly accessed <a href="https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html">here</a>.</p>
-</div>
+<p><span id="8" class="paragraph-number">[8]</span> For a more involved example, check out my <a href="https://github.com/cysouw/diathesis">manuscript</a> about German grammar written in Pandoc Markdown. The HTML version can be directly accessed <a href="https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html">here</a>.</p>
 <h2 id="referencing">Referencing</h2>
-<div id="9" class="paragraph-number" style="text-indent: -20px;">
-<p><sup>[9]</sup> Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash ‘#’ as an indicator of paragraphs, like this (Cysouw 2021: #2.7), to differentiate them from page numbers, like this (Cysouw 2021: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: <a href="https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html#2.7">(Cysouw 2021: #2.7)</a>. By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2.</p>
-</div>
+<p><span id="9" class="paragraph-number">[9]</span> Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash ‘#’ as an indicator of paragraphs, like this (Cysouw 2021: #2.7), to differentiate them from page numbers, like this (Cysouw 2021: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: <a href="https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html#2.7">(Cysouw 2021: #2.7)</a>. By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2.</p>
 <h2 id="in-document-referencing">In-document referencing</h2>
-<div id="10" class="paragraph-number" style="text-indent: -24px;">
-<p><sup>[10]</sup> It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: <code>{#test}</code>. As you can see in this readme (in the <a href="https://github.com/cysouw/count-para#in-document-referencing">GitHub version</a>), there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this <code>[@test]</code>. After Pandoc processing, it then looks like a reference to <a href="#10">paragraph 10</a> (this reference is replace by a number and hyperlinked after processing with Pandoc).</p>
-</div>
+<p><span id="10" class="paragraph-number">[10]</span> It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: <code>{#test}</code>. As you can see in this readme (in the <a href="https://github.com/cysouw/count-para#in-document-referencing">GitHub version</a>), there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this <code>[@test]</code>. After Pandoc processing, it then looks like a reference to <a href="#10">paragraph 10</a> (this reference is replace by a number and hyperlinked after processing with Pandoc).</p>
 <h2 id="options">Options</h2>
 <ul>
 <li><strong><code>resetAtChapter</code></strong> To restart numbering this filter provides an option: by specifying <code>resetAtChapter: true</code> in the metadata for Pandoc (for an example, see below) paragraph-numbers will restart each chapter and a chapter number is added. The term ‘chapter’ is a slight misnomer, because it simply refers to the highest level of headings in the manuscript. Note that the chapter numbers are also added when there are no explicit chapter numbers.</li>
@@ -220,9 +205,7 @@ pandoc readme.md \
 <li><strong><code>addPageNr</code></strong> is by default set to <code>addPageNr: true</code>. This option is only relevant for page-based formats and it will add “on page X” after the paragraph number. Currently only implemented for latex.</li>
 </ul>
 <h2 id="issues">Issues</h2>
-<div id="11" class="paragraph-number" style="text-indent: -23px;">
-<p><sup>[11]</sup> Because of the usage of the Pandoc Cite-format, this filter has to be applied before the <code>citeproc</code> filter that processes the literature references.</p>
-</div>
+<p><span id="11" class="paragraph-number">[11]</span> Because of the usage of the Pandoc Cite-format, this filter has to be applied before the <code>citeproc</code> filter that processes the literature references.</p>
 <pre><code>---
 title: count-para
 author: Michael Cysouw
