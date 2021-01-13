@@ -87,7 +87,7 @@ function addFormatting (meta)
   if FORMAT:match "latex" then
     addTexPreamble("\\usepackage{marginnote}")
     addTexPreamble("\\reversemarginpar")
-    addTexPreamble("\\newcommand{\\paragraphnumber}[1]{\\marginnote{\\color{lightgray}\\tiny{#1}}[3pt]}")
+    addTexPreamble("\\newcommand{\\paragraphnumber}[1]{\\marginnote{\\color{lightgray}\\tiny{#1}}[-3pt]}")
   end
   
   meta['header-includes'] = tmp
@@ -125,6 +125,7 @@ function countPara (doc)
       end
 
       -- format number to insert
+      local number = ID
       if enclosing:len() == 1 then
         number = enclosing..ID..enclosing
       else
