@@ -87,7 +87,7 @@ function addFormatting (meta)
   if FORMAT:match "latex" then
     addTexPreamble("\\usepackage{marginnote}")
     addTexPreamble("\\reversemarginpar")
-    addTexPreamble("\\newcommand{\\paragraphnumber}[1]{\\marginnote{\\color{lightgray}\\tiny{#1}}[-3pt]}")
+    addTexPreamble("\\newcommand{\\paragraphnumber}[1]{\\marginnote{\\color{lightgray}\\tiny{#1}}[0pt]}")
   end
   
   meta['header-includes'] = tmp
