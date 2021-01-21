@@ -65,17 +65,18 @@ function addFormatting (meta)
   
   if FORMAT:match "html" then
     local css = [[ 
-  <style>
-  .paragraph-number { 
-    float: left;
-    margin-left: -5em;
-    width: 4.5em;
-    text-align: right;
-    color: grey;
-    font-size: x-small;
-    padding-top: 5px;
-  }
-  </style>
+<!-- CSS added by lua-filter 'count-para' -->
+<style>
+.paragraph-number { 
+  float: left;
+  margin-left: -5em;
+  width: 4.5em;
+  text-align: right;
+  color: grey;
+  font-size: x-small;
+  padding-top: 5px;
+}
+</style>
     ]]
     tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("html", css))
   end
