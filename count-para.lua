@@ -28,6 +28,7 @@ local indexUserID = {}
 
 local resetAtChapter = false
 local enclosing = "[]"
+local chapterSep = "."
 local refName = "paragraph "
 local addPageNr = true
 
@@ -39,6 +40,10 @@ function getUserSettings (meta)
 
   if meta.enclosing ~= nil then
     enclosing = pandoc.utils.stringify(meta.enclosing)
+  end
+
+  if meta.chapterSep ~= nil then
+    chapterSep = pandoc.utils.stringify(meta.chapterSep)
   end
 
   if meta.refName ~= nil then
@@ -122,7 +127,7 @@ function countPara (doc)
       count = count + 1	
       local ID = count
       if resetAtChapter then 
-        ID = chapter.."."..count 
+        ID = chapter..chapterSep..count 
       end
 
       -- format number to insert

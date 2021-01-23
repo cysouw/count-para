@@ -1,8 +1,13 @@
+# count-para 1.2
+
+not planned yet
+
 # count-para 1.1
 
 ## changes
 
 - add option to include in-document links to paragraphs by inserting labels at the start of a paragraph
+- add option to change chapter separator
 - rewrite of HTML positioning using floats
 
 # count para 1.0

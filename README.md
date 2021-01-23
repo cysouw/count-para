@@ -48,6 +48,7 @@ Now we can refer to paragraphs! Of course we can simple write them in our citati
 ## Options
 
 - **`resetAtChapter`** To restart numbering this filter provides an option: by specifying `resetAtChapter: true` in the metadata for Pandoc (for an example, see below) paragraph-numbers will restart each chapter and a chapter number is added. The term 'chapter' is a slight misnomer, because it simply refers to the highest level of headings in the manuscript. Note that the chapter numbers are also added when there are no explicit chapter numbers.
+- **`chapterSep`** By default, the chapter-number is separated by the running number by a full stop, e.g. `3.45`. Use this option to specify a different string to separate chapter and example number.
 - **`enclosing`** By default, the numbers are enclosed in square brackets. This option allows for other enclosures. Typically, a sequence of two characters is provided, an opening and a closing character, e.g `"()"` or `"[]"`. When a single character is provided, this is reused, e.g `"|"`. Absence of any enclosure is achieved by providing an empty string, i.e `""`.
 - **`refName`** How should in-document references by called? By default the string "`paragraph `" (with a space) is inserted in-text before a paragraph-reference number. But you could for example set this to simply `refName: "#"` to get a hash without space before the number. Or you can leave it empty and just type whatever you want before the number.
 - **`addPageNr`** is by default set to `addPageNr: true`. This option is only relevant for page-based formats and it will add "on page X" after the paragraph number. Currently only implemented for latex.
@@ -62,6 +63,7 @@ title: count-para
 author: Michael Cysouw
 resetAtChapter: false
 enclosing: "[]"
+chapterSep: "."
 refName: "paragraph "
 addPageNr: true
 ---

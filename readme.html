@@ -149,17 +149,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
    
-    <style>
-    .paragraph-number { 
-      float: left;
-      margin-left: -5em;
-      width: 4.5em;
-      text-align: right;
-      color: grey;
-      font-size: x-small;
-      padding-top: 5px;
-    }
-    </style>
+  <!-- CSS added by lua-filter 'count-para' -->
+  <style>
+  .paragraph-number { 
+    float: left;
+    margin-left: -5em;
+    width: 4.5em;
+    text-align: right;
+    color: grey;
+    font-size: x-small;
+    padding-top: 5px;
+  }
+  </style>
       
 </head>
 <body>
@@ -200,6 +201,7 @@ pandoc readme.md \
 <h2 id="options">Options</h2>
 <ul>
 <li><strong><code>resetAtChapter</code></strong> To restart numbering this filter provides an option: by specifying <code>resetAtChapter: true</code> in the metadata for Pandoc (for an example, see below) paragraph-numbers will restart each chapter and a chapter number is added. The term ‘chapter’ is a slight misnomer, because it simply refers to the highest level of headings in the manuscript. Note that the chapter numbers are also added when there are no explicit chapter numbers.</li>
+<li><strong><code>chapterSep</code></strong> By default, the chapter-number is separated by the running number by a full stop, e.g. <code>3.45</code>. Use this option to specify a different string to separate chapter and example number.</li>
 <li><strong><code>enclosing</code></strong> By default, the numbers are enclosed in square brackets. This option allows for other enclosures. Typically, a sequence of two characters is provided, an opening and a closing character, e.g <code>"()"</code> or <code>"[]"</code>. When a single character is provided, this is reused, e.g <code>"|"</code>. Absence of any enclosure is achieved by providing an empty string, i.e <code>""</code>.</li>
 <li><strong><code>refName</code></strong> How should in-document references by called? By default the string “<code>paragraph</code>” (with a space) is inserted in-text before a paragraph-reference number. But you could for example set this to simply <code>refName: "#"</code> to get a hash without space before the number. Or you can leave it empty and just type whatever you want before the number.</li>
 <li><strong><code>addPageNr</code></strong> is by default set to <code>addPageNr: true</code>. This option is only relevant for page-based formats and it will add “on page X” after the paragraph number. Currently only implemented for latex.</li>
@@ -211,6 +213,7 @@ title: count-para
 author: Michael Cysouw
 resetAtChapter: false
 enclosing: &quot;[]&quot;
+chapterSep: &quot;.&quot;
 refName: &quot;paragraph &quot;
 addPageNr: true
 ---</code></pre>
