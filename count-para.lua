@@ -65,8 +65,10 @@ end
 
 function addFormatting (meta)
 
-  local tmp = meta['header-includes']
-              or pandoc.MetaList{meta['header-includes']}
+  local tmp = pandoc.MetaList{meta['header-includes']}
+  if meta['header-includes'] ~= nil then
+    tmp = meta['header-includes']
+  end
   
   if FORMAT:match "html" then
     local css = [[ 
