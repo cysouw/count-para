@@ -1,6 +1,6 @@
-# count-para 1.2
+# count-para 1.2 (upcoming)
 
-not planned yet
+- added latex dependency 'xcolor'
 
 # count-para 1.1
 

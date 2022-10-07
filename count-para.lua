@@ -93,6 +93,7 @@ function addFormatting (meta)
   end
 
   if FORMAT:match "latex" then
+    addTexPreamble("\\usepackage{xcolor")
     addTexPreamble("\\usepackage{marginnote}")
     addTexPreamble("\\reversemarginpar")
     addTexPreamble("\\newcommand{\\paragraphnumber}[1]{\\marginnote{\\color{lightgray}\\tiny{#1}}[0pt]}")
