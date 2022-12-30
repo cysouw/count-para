@@ -1,6 +1,7 @@
 # count-para 1.2 (upcoming)
 
 - added latex dependency 'xcolor'
+- fixed bug of placement of latex numbering on different page
 
 # count-para 1.1
 

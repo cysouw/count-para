@@ -163,7 +163,8 @@ function countPara (doc)
           -- add target for link to the number
           texCount = "\\hypertarget{"..userID.."}{\n"..texCount.."\\label{"..userID.."}}"
         end
-        table.insert(doc.blocks[i].content, 1, pandoc.RawInline("tex", texCount))
+        -- insert after first word in Latex to keep number on same page
+        table.insert(doc.blocks[i].content, 2, pandoc.RawInline("tex", texCount))
       else
         table.insert(doc.blocks[i].content, 1, pandoc.Space())
         table.insert(doc.blocks[i].content, 1, pandoc.Span(number, pandoc.Attr(ID, {"paragraph-number"})))
