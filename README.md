@@ -2,8 +2,8 @@
 
 **Summary**: Use this Pandoc filter to add numbers to paragraphs of a text. These numbers can be used as stable identifiers for scholarly citations in an online world of adaptive design where page numbers are not useful anymore.
 
-- Check out this readme in [HTML](https://gitcdn.link/repo/cysouw/count-para/main/readme.html) and [PDF](https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf).
-- Refer to paragraphs by using a hash, e.g. (Cysouw 2021: #9), and add this hashtag to the end of a link to be automatically directed to the paragraph, e.g. link to the ninth paragraph of this readme like this: [(Cysouw 2021: #9)](https://gitcdn.link/repo/cysouw/count-para/main/readme.html#9).
+- Check out this readme in [HTML](http://cysouw.github.io/count-para/readme.html) and [PDF](https://cysouw.github.io/count-para/readme.pdf).
+- Refer to paragraphs by using a hash, e.g. (Cysouw 2021: #9), and add this hashtag to the end of a link to be automatically directed to the paragraph, e.g. link to the ninth paragraph of this readme like this: [(Cysouw 2021: #9)](http://cysouw.github.io/count-para/readme.html#9).
 - There is explicitly no option to hide these identifiers in the final output, because the numbers are supposed to be 'hard-coded' into the text for them to function as stable identifiers.
 
 ## Rationale
@@ -20,30 +20,30 @@ The idea is to simply put a number at the start of each paragraph, hard coded in
 
 There are many ways in practice to add the numbers. I provide here one possibility, a Pandoc Lua filter. [Pandoc](https://pandoc.org) is a conversion system, mainly provided by John MacFarlane, that allows for a highly flexible conversion between many different output formats. The basic idea is to write text in Pandoc's extension of [Markdown](https://daringfireball.net/projects/markdown/syntax), and then the text can be published into different formats. Pandoc has an extension mechanism called 'filters', and the easiest to use variant are 'lua filters'. They basically consist of just one file that provides the extra functionality.
 
-The file `count-para.lua` in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in [HTML](https://gitcdn.link/repo/cysouw/count-para/main/readme.html) and as a [PDF](https://gitcdn.link/repo/cysouw/count-para/main/readme.pdf) made with Latex by the following commands (much of this can be specified in so-called `default` files, which are much easier to handle):
+The file `count-para.lua` in this repository is such a file. Used with Pandoc it will count paragraphs, add a number to the front, and provides (currently) nice outputs for HTML and Latex. As an example, this readme-document is provided with paragraph-numbering in [HTML](http://cysouw.github.io/count-para/readme.html) and as a [PDF](http://cysouw.github.io/count-para/readme.pdf) made with Latex by the following commands (much of this can be specified in so-called `default` files, which are much easier to handle):
 
 ```
 pandoc readme.md \
     --to html \
-    --output readme.html \
+    --output docs/readme.html \
     --lua-filter count-para.lua \
     --standalone
 
 pandoc readme.md \
     --to pdf \
-    --output readme.pdf \
+    --output docs/readme.pdf \
     --lua-filter count-para.lua
 ```
 
-For a more involved example, check out my [manuscript](https://github.com/cysouw/diathesis) about German grammar written in Pandoc Markdown. The HTML version can be directly accessed [here](https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html).
+For a more involved example, check out my [manuscript](https://github.com/cysouw/diathesis) about German grammar written in Pandoc Markdown. The HTML version can be directly accessed [here](https://cysouw.github.io/diathesis).
 
 ## Referencing
 
-Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash '#' as an indicator of paragraphs, like this (Cysouw 2021: #2.7), to differentiate them from page numbers, like this (Cysouw 2021: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: [(Cysouw 2021: #2.7)](https://gitcdn.link/repo/cysouw/diathesis/main/cysouwDiathesisManuscript.html#2.7). By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. 
+Now we can refer to paragraphs! Of course we can simple write them in our citations, just like page numbers. I propose to use the hash '#' as an indicator of paragraphs, like this (Cysouw 2021: #2.7), to differentiate them from page numbers, like this (Cysouw 2021: 34). This hash is not just a typographic issue, but it is actually the method to link to the paragraph in question. If you add #2.7 to the end of the link to my manuscript you will immediately end up at that paragraph, e.g. click here: [(Cysouw 2021: #2.7)](https://cysouw.github.io/diathesis#2.7). By the way, the number is 2.7 because I have restarted numbering at chapters. So this is actually the seventh paragraph of chapter 2. 
 
 ## In-document referencing
 
-{#test} It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: `{#test}`. As you can see in this readme (in the [GitHub version](https://github.com/cysouw/count-para#in-document-referencing)), there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this `[@test]`. After Pandoc processing, it then looks like a reference to [@test] (this reference is replace by a number and hyperlinked after processing with Pandoc).
+{#test} It is also possible to refer to a paragraph inside your own document. Simply add a reference-label to the start of a paragraph that looks like this: `{#test}`. As you can see in this readme (in the [GitHub version](https://cysouw.github.io/count-para#in-document-referencing)), there is such a reference at the start of this paragraph. Now you can refer to this paragraph by using the Pandoc citation format that looks like this `[@test]`. After Pandoc processing, it then looks like a reference to [@test] (this reference is replace by a number and hyperlinked after processing with Pandoc).
 
 ## Options
 

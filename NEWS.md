@@ -2,10 +2,9 @@
 
 - added latex dependency 'xcolor'
 - fixed bug of placement of latex numbering on different page
+- fixed bug with new attribute-typing of Pandoc
 
 # count-para 1.1
-
-## changes
 
 - add option to include in-document links to paragraphs by inserting labels at the start of a paragraph
 - add option to change chapter separator
