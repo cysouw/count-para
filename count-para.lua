@@ -122,7 +122,7 @@ function countPara (doc)
     end
 
     -- get Para, but not if there is an Image inside
-    if  doc.blocks[i].tag == "Para"
+    if  doc.blocks[i].tag == "Para" and #doc.blocks[i].c >= 1
         and doc.blocks[i].content[1].tag ~= "Image"
     then
 
@@ -135,10 +135,10 @@ function countPara (doc)
 
       -- format number to insert
       local number = ID
-      if enclosing:len() == 1 then
+      if pandoc.text.len(enclosing) == 1 then
         number = enclosing..ID..enclosing
       else
-        number = enclosing:sub(1,1)..ID..enclosing:sub(2,2)
+        number = pandoc.text.sub(enclosing, 1, 1)..ID..pandoc.text.sub(enclosing, 2, 2)
       end
 
       -- check for user-inserted ids at the start of the paragraph
