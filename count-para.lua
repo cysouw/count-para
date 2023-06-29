@@ -122,7 +122,7 @@ function countPara (doc)
     end
 
     -- get Para, but not if there is an Image inside
-    if  doc.blocks[i].tag == "Para"
+    if  doc.blocks[i].tag == "Para" and #doc.blocks[i].c >= 1
         and doc.blocks[i].content[1].tag ~= "Image"
     then
 
